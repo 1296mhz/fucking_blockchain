@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const BrewNode = require("./brewNode");
-
+const cors = require('cors');
 const port = 18070 + Number(Math.floor(Math.random() * 30));
 console.log("starting node on ", port);
 let node1 = new BrewNode(port);
@@ -12,7 +12,7 @@ const http_port = 3000 + Number(Math.floor(Math.random() * 10));
 
 let BrewHTTP = function() {
   const app = new express();
-
+  app.use(cors());
   app.use(bodyParser.json());
 
   app.get("/addNode/:port", (req, res) => {
